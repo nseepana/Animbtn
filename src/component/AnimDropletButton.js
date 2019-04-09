@@ -3,27 +3,36 @@ import React, { Component } from 'react';
 import './AnimDropletButton.css';
 
 class AnimDropletButton extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state = {isOpen: true};
         this.handleClick = this.handleClick.bind(this);
+        this.state = {
+            isOpen: false,
+            pos: {}
+        }
+        this.btnPos = React.createRef();
     }
 
-    handleClick(){  
-        // console.log("cool"); 
+    handleClick() {
         this.setState(state => ({
-            isOpen: !state.isOpen
-        }));
+            isOpen: !state.isOpen,
+            pos: this.btnPos.current.getBoundingClientRect()
+        }))
+
+
+        this.props.clickHandler(this.state);
+
+
     }
     render() {
         const dropletClassName = [
-            "droplet", this.state.isOpen ? "": "state-close"
+            "droplet", this.state.isOpen ? "state-close" : ""
         ];
         const indicatorClassName = [
-            "indicator", this.state.isOpen ? "": "state-close"
+            "indicator", this.state.isOpen ? "state-close" : ""
         ];
         return (
-            <div className={dropletClassName.join(" ").trim()} onClick={this.handleClick}>
+            <div ref={this.btnPos} className={dropletClassName.join(" ").trim()} onClick={this.handleClick}>
                 <div className={indicatorClassName.join(" ").trim()}>+</div>
             </div>
         );
