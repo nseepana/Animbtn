@@ -22,7 +22,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "react-dev-utils": "^8.0.0",
+    "react-dev-utils": "^11.0.4",
     "react-scripts": "^2.1.8"
   }
 }
